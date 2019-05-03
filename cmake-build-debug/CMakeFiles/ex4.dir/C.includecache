@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/eliran/CLionProjects/ex4/main.c
+stdio.h
+-
+threadPool.h
+/home/eliran/CLionProjects/ex4/threadPool.h
+
+/home/eliran/CLionProjects/ex4/osqueue.h
+
+/home/eliran/CLionProjects/ex4/threadPool.h
+malloc.h
+-
+unistd.h
+-
+stdlib.h
+-
+osqueue.h
+/home/eliran/CLionProjects/ex4/osqueue.h
+pthread.h
+-
+
