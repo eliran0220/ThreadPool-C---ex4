@@ -78,13 +78,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/eliran/CLionProjects/ex4/main.c">
-			<Option target="ex4"/>
-		</Unit>
 		<Unit filename="/home/eliran/CLionProjects/ex4/osqueue.c">
 			<Option target="ex4"/>
 		</Unit>
 		<Unit filename="/home/eliran/CLionProjects/ex4/osqueue.h">
+			<Option target="ex4"/>
+		</Unit>
+		<Unit filename="/home/eliran/CLionProjects/ex4/threadpool.c">
 			<Option target="ex4"/>
 		</Unit>
 		<Unit filename="/home/eliran/CLionProjects/ex4/CMakeLists.txt">

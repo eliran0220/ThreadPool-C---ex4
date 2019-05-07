@@ -57,18 +57,18 @@ include CMakeFiles/ex4.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ex4.dir/flags.make
 
-CMakeFiles/ex4.dir/main.c.o: CMakeFiles/ex4.dir/flags.make
-CMakeFiles/ex4.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eliran/CLionProjects/ex4/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ex4.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ex4.dir/main.c.o   -c /home/eliran/CLionProjects/ex4/main.c
+CMakeFiles/ex4.dir/threadpool.c.o: CMakeFiles/ex4.dir/flags.make
+CMakeFiles/ex4.dir/threadpool.c.o: ../threadpool.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eliran/CLionProjects/ex4/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ex4.dir/threadpool.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ex4.dir/threadpool.c.o   -c /home/eliran/CLionProjects/ex4/threadpool.c
 
-CMakeFiles/ex4.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ex4.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eliran/CLionProjects/ex4/main.c > CMakeFiles/ex4.dir/main.c.i
+CMakeFiles/ex4.dir/threadpool.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ex4.dir/threadpool.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eliran/CLionProjects/ex4/threadpool.c > CMakeFiles/ex4.dir/threadpool.c.i
 
-CMakeFiles/ex4.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ex4.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eliran/CLionProjects/ex4/main.c -o CMakeFiles/ex4.dir/main.c.s
+CMakeFiles/ex4.dir/threadpool.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ex4.dir/threadpool.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eliran/CLionProjects/ex4/threadpool.c -o CMakeFiles/ex4.dir/threadpool.c.s
 
 CMakeFiles/ex4.dir/osqueue.c.o: CMakeFiles/ex4.dir/flags.make
 CMakeFiles/ex4.dir/osqueue.c.o: ../osqueue.c
@@ -85,13 +85,13 @@ CMakeFiles/ex4.dir/osqueue.c.s: cmake_force
 
 # Object files for target ex4
 ex4_OBJECTS = \
-"CMakeFiles/ex4.dir/main.c.o" \
+"CMakeFiles/ex4.dir/threadpool.c.o" \
 "CMakeFiles/ex4.dir/osqueue.c.o"
 
 # External object files for target ex4
 ex4_EXTERNAL_OBJECTS =
 
-ex4: CMakeFiles/ex4.dir/main.c.o
+ex4: CMakeFiles/ex4.dir/threadpool.c.o
 ex4: CMakeFiles/ex4.dir/osqueue.c.o
 ex4: CMakeFiles/ex4.dir/build.make
 ex4: CMakeFiles/ex4.dir/link.txt

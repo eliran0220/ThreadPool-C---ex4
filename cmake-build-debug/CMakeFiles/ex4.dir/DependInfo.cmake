@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/eliran/CLionProjects/ex4/main.c" "/home/eliran/CLionProjects/ex4/cmake-build-debug/CMakeFiles/ex4.dir/main.c.o"
   "/home/eliran/CLionProjects/ex4/osqueue.c" "/home/eliran/CLionProjects/ex4/cmake-build-debug/CMakeFiles/ex4.dir/osqueue.c.o"
+  "/home/eliran/CLionProjects/ex4/threadpool.c" "/home/eliran/CLionProjects/ex4/cmake-build-debug/CMakeFiles/ex4.dir/threadpool.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

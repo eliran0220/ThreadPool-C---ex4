@@ -123,33 +123,6 @@ ex4/fast:
 	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/build
 .PHONY : ex4/fast
 
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/main.c.s
-.PHONY : main.c.s
-
 osqueue.o: osqueue.c.o
 
 .PHONY : osqueue.o
@@ -177,6 +150,33 @@ osqueue.c.s:
 	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/osqueue.c.s
 .PHONY : osqueue.c.s
 
+threadpool.o: threadpool.c.o
+
+.PHONY : threadpool.o
+
+# target to build an object file
+threadpool.c.o:
+	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/threadpool.c.o
+.PHONY : threadpool.c.o
+
+threadpool.i: threadpool.c.i
+
+.PHONY : threadpool.i
+
+# target to preprocess a source file
+threadpool.c.i:
+	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/threadpool.c.i
+.PHONY : threadpool.c.i
+
+threadpool.s: threadpool.c.s
+
+.PHONY : threadpool.s
+
+# target to generate assembly for a file
+threadpool.c.s:
+	$(MAKE) -f CMakeFiles/ex4.dir/build.make CMakeFiles/ex4.dir/threadpool.c.s
+.PHONY : threadpool.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ex4"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... osqueue.o"
 	@echo "... osqueue.i"
 	@echo "... osqueue.s"
+	@echo "... threadpool.o"
+	@echo "... threadpool.i"
+	@echo "... threadpool.s"
 .PHONY : help
 
 

@@ -12,13 +12,12 @@ typedef struct Task_t {
     void * information;
 }Task;
 
-enum destoryState {NoDestroy,Destory,waitAll,waitOnlyRunning};
+enum destoryState {NoDestroy,waitAll,waitOnlyRunning};
 
 typedef struct thread_pool {
     pthread_t *threads;
     int numOfThreads;
     int isStopped;
-    pthread_mutex_t stopLock;
     pthread_mutex_t lockQueue;
     pthread_cond_t notify;
     enum destoryState destory;
