@@ -1,4 +1,9 @@
-#include <stdio.h>
+/*
+ * Eliran Darshan
+ * 311451322
+ * 07
+ */
+
 #include "threadPool.h"
 
 #define ERROR_MESSAGE "Error in system call\n"
@@ -70,6 +75,14 @@ void completeTask(ThreadPool *th);
  */
 void freeThreadPool(ThreadPool *threadPool);
 
+/*
+ * Function name:tpCreate
+ * The input: int numOfThreads
+ * The output: Threadpool*
+ * The function operation: the function allocates space for the threadpool struct, and all
+ * it's needed data, and creates the pthreads with the runTask's function
+ * as parameter
+ */
 
 ThreadPool *tpCreate(int numOfThreads) {
     int i;
@@ -87,9 +100,9 @@ ThreadPool *tpCreate(int numOfThreads) {
         freeThreadPool(threadPool);
         displayError();
     }
-    if (pthread_mutex_init(&(threadPool->lockQueue), NULL) != 0 ||
-        pthread_cond_init(&(threadPool->notify), NULL) != 0 ||
-        pthread_mutex_init(&(threadPool->lockPool), NULL) != 0) {
+    if (pthread_mutex_init(&(threadPool->lockQueue), NULL) != SUCCESS ||
+        pthread_cond_init(&(threadPool->notify), NULL) != SUCCESS ||
+        pthread_mutex_init(&(threadPool->lockPool), NULL) != SUCCESS) {
         freeThreadPool(threadPool);
         displayError();
     }
@@ -106,7 +119,13 @@ ThreadPool *tpCreate(int numOfThreads) {
     return threadPool;
 }
 
-
+/*
+ * Function name:tpInsertTask
+ * The input: ThreadPool *threadPool, void (*computeFunc)(void *), void *param
+ * The output: int
+ * The function operation: the function inserts a new task to the thread pool, if the
+ * threadpool is already stopped, we exit with a fail
+ */
 int tpInsertTask(ThreadPool *threadPool, void (*computeFunc)(void *), void *param) {
 
     if (threadPool->isStopped) {
@@ -119,26 +138,38 @@ int tpInsertTask(ThreadPool *threadPool, void (*computeFunc)(void *), void *para
     }
     task->func = computeFunc;
     task->information = param;
-    if (pthread_mutex_lock(&threadPool->lockQueue) != 0) {
+    if (pthread_mutex_lock(&threadPool->lockQueue) != SUCCESS) {
         freeThreadPool(threadPool);
         displayError();
     }
     osEnqueue(threadPool->osQueue, task);
     //signal to the the thread pool that a new task has been added to the queue
-    if (pthread_cond_signal(&threadPool->notify) != 0) {
+    if (pthread_cond_signal(&threadPool->notify) != SUCCESS) {
         freeThreadPool(threadPool);
         displayError();
     }
-    if (pthread_mutex_unlock(&threadPool->lockQueue) != 0) {
+    if (pthread_mutex_unlock(&threadPool->lockQueue) != SUCCESS) {
         freeThreadPool(threadPool);
         displayError();
     }
     return SUCCESS;
 }
 
+/*
+ * Function name:tpDestroy
+ * The input: ThreadPool *threadPool, int shouldWaitForTasks
+ * The output: void
+ * The function operation: the function begins the destroy mode of the
+ * threadpool, we first declare if we wait for all the tasks that are
+ * running to be completed or only those who currently run (not including in the
+ * queue), then join all pthreads and call freeThreadPool function.
+ */
 void tpDestroy(ThreadPool *threadPool, int shouldWaitForTasks) {
     int i;
-    pthread_mutex_lock(&(threadPool->lockPool));
+    if (pthread_mutex_lock(&(threadPool->lockPool)) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
     //check if the threadpool is already stopped
     if (threadPool->isStopped) {
         twiceDestroyMsg();
@@ -150,19 +181,35 @@ void tpDestroy(ThreadPool *threadPool, int shouldWaitForTasks) {
     } else {
         threadPool->destroy = waitOnlyRunning;
     }
-    pthread_mutex_lock(&threadPool->lockQueue);
+    if (pthread_mutex_lock(&threadPool->lockQueue) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
     //broadcast to wait until queue is empty
-    pthread_cond_broadcast(&threadPool->notify);
-    pthread_mutex_unlock(&threadPool->lockQueue);
+    if (pthread_cond_broadcast(&threadPool->notify) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
+    if (pthread_mutex_unlock(&threadPool->lockQueue) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
     for (i = 0; i < threadPool->numOfThreads; i++) {
-        if (pthread_join(threadPool->threads[i], NULL) != 0) {
+        if (pthread_join(threadPool->threads[i], NULL) != SUCCESS) {
+            freeThreadPool(threadPool);
             displayError();
         }
     }
-    pthread_mutex_trylock(&threadPool->lockPool);
+    if (pthread_mutex_trylock(&threadPool->lockPool) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
     //threadpool is changed to stop
     threadPool->isStopped = YES;
-    pthread_mutex_unlock(&threadPool->lockPool);
+    if (pthread_mutex_unlock(&threadPool->lockPool) != SUCCESS) {
+        freeThreadPool(threadPool);
+        displayError();
+    }
     freeThreadPool(threadPool);
 }
 
@@ -203,9 +250,10 @@ void executeTask(void *args) {
         if (threadPool->destroy == NoDestroy) {
             if (osIsQueueEmpty(threadPool->osQueue)) {
                 // handle busy waiting for task to be inserted
-                if (pthread_cond_wait(&threadPool->notify, &threadPool->lockQueue) != 0 ||
-                    pthread_mutex_unlock(&threadPool->lockQueue) != 0) {
-                    printf("in wait\n");
+                if (pthread_cond_wait(&threadPool->notify, &threadPool->lockQueue) != SUCCESS ||
+                    pthread_mutex_unlock(&threadPool->lockQueue) != SUCCESS) {
+                    freeThreadPool(threadPool);
+                    displayError();
                 }
 
             } else {
